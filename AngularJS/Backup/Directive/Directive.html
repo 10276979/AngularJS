@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="DirectiveApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Directive</title>
+    <script src="res/js/angular.js"></script>
+    <style type="text/css">
+        body, span, div, ul, li { margin: 0; padding: 0; font-size: 12px; color: #ffffff; list-style: none; }
+            ul li { list-style: none; line-height: 30px; padding: 0 20px; }
+        .box { width: 400px; margin: 0 auto; }
+        .title { background: #ffd800; height: 20px; line-height: 20px; cursor: pointer; padding: 5px; border-bottom: 1px solid #ccc; }
+        .main { background: #ff6a00; }
+        .red { background: #ffba00; }
+        .set { background: #808080; width: 190px; height: 30px; line-height: 30px; float: left; cursor: pointer; padding-left: 10px; }
+            .set:hover { background: #ccc; }
+    </style>
+    <script type="text/javascript">
+        var str = [1, 2, 3, 4, 5, 6];
+        var directiveApp = angular.module("DirectiveApp", []);
+        directiveApp.directive("hello", function () {
+            return {
+                restrict: "A",
+                templateUrl: "res/page/data.txt",
+                //template: "<div><div class='title {{red}}' ng-click='toggle()' ng-bind='title' ng-mouseenter='bgMove()' ng-mouseleave='removeBg()'></div><div ng-transclude ng-show='isShow'></div></div>",
+                replace: true,
+                transclude: true,
+                link: function (scope, element, attrs) {
+                    scope.isShow = false;
+                    scope.toggle = function () {
+                        console.log(scope);
+                        scope.isShow = !scope.isShow;
+                        console.log(scope.isShow);
+                        if (scope.isShow) {
+                            scope.title = "点击隐藏内容";
+                        } else {
+                            scope.title = "点击显示内容";
+                        }
+                    };
+                    scope.bgMove = function () {
+                        scope.red = "red";
+                    };
+                    scope.removeBg = function () {
+                        scope.red = "";
+                    }
+                }
+            };
+        });
+        directiveApp.controller("myController", ["$scope", "$http", function ($scope, $http) {
+            $scope.title = "点击显示内容";
+            $scope.things = str;
+            $scope.red = "";
+            $scope.setData = function () {
+                $http({
+                    method: "GET",
+                    url: "res/page/setData.txt"
+                }).success(function (data, status, headers, config) {
+                    $scope.things = data;
+                }).error(function (data, status, headers, config) {
+
+                });
+            };
+            $scope.redDate = function () {
+                $scope.things = str;
+            }
+        }]);
+    </script>
+</head>
+<body>
+    <div ng-controller="myController" class="box">
+        <div hello>
+            <ul class="main">
+                <li ng-repeat="thing in things" ng-bind="thing"></li>
+            </ul>
+            <a ng-click="setData()" class="set">修改things的内容</a>
+            <a ng-click="redDate()" class="set">还原things的内容</a>
+        </div>
+    </div>
+</body>
+</html>

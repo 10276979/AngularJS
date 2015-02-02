@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myFactory">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var myFoctory = angular.module("myFactory", []);
+        myFoctory.factory("itme", function () {
+            var itme = [];
+            var fac = {};
+            itme.push({ "name": "test" });
+            fac.getItme = function () {
+                return itme;
+            }
+            return fac;
+        });
+
+        myFoctory.controller("myFactoryController", ["$scope", "itme", function ($scope, itme) {
+            $scope.itme = itme.getItme();
+
+
+        }]);
+
+
+
+
+    </script>
+</head>
+<body>
+    <div ng-controller="myFactoryController">
+        <div ng-repeat="i in itme" ng-bind="i.name"></div>
+
+    </div>
+
+</body>
+</html>

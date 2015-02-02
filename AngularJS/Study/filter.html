@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="HomeModule">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var homeModule = angular.module("HomeModule", []);
+        homeModule.filter("titleCase", function () {
+            var titleCaseFilter = function (input) {
+                console.log(input);
+                var words = input.split(" ");
+                for (var i = 0; i < words.length; i++) {
+                    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+                }
+
+                return words.join("1");
+            }
+            return titleCaseFilter;
+        });
+
+        homeModule.filter("titleCase1", function () {
+            var titleCaseFilter = function (input) {
+                console.log(input);
+                var words = input.split("1");
+                for (var i = 0; i < words.length; i++) {
+                    words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+                }
+
+                return words.join("2");
+
+            }
+            return titleCaseFilter;
+        });
+
+        homeModule.controller("HomeController", ["$scope", function ($scope) {
+            $scope.pageHeading = "behold the magesty of your page title";
+
+        }]);
+
+
+    </script>
+
+</head>
+<body>
+    <div ng-controller="HomeController">
+        <h1>{{pageHeading | titleCase | titleCase1}}</h1>
+    </div>
+</body>
+</html>

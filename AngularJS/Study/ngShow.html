@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myNgShow">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var myNgShow = angular.module("myNgShow", []);
+        myNgShow.controller("myNgShowClr", ["$scope", function ($scope) {
+            $scope.ngShowDatas = [{
+                name: "test1", id: 1
+            }, {
+                name: "test2", id: 2
+            }, {
+                name: "test3", id: 3
+            }];
+            
+            $scope.menuState = { "show": true };
+
+            $scope.toggleMenu = function () {
+                $scope.menuState.show = !$scope.menuState.show;
+
+            }
+
+        }]);
+
+
+
+    </script>
+</head>
+<body>
+    <div ng-controller="myNgShowClr">
+        <button ng-click="toggleMenu()">隐藏</button>
+        <ul ng-show="menuState.show">
+            <li ng-repeat="ngShowData in ngShowDatas" ng-bind="ngShowData.name"></li>
+
+        </ul>
+
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="MyServer">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="res/js/angular.js"></script>
+    <script type="text/javascript">
+        var myServer = angular.module("MyServer", []);
+        myServer.factory("Server", ["$http", function ($http) {
+            return {
+                test1: function () {
+                    console.log(1);
+                },
+                test2: function () {
+                    console.log(2);
+                }
+            }
+        }]);
+
+        myServer.directive("server", function () {
+            return {
+                restrict: "A",
+                //template: "<div ng-click='setCss()'>1</div>",
+                replace: true,
+                link: function (scope, element, attrs) {
+                    scope.setCss = function (css1) {
+                        scope.css = css1;
+                    }
+                }
+            }
+        });
+
+        myServer.controller("myServerController", ["$scope", "$http", "Server", function ($scope, $http, Server) {
+            $scope.css = "12";
+            $scope.testServer = function () {
+                Server.test1(); //调自定义服务里的方法
+                $scope.setCss("background:red"); //调用指令方法
+            }
+        }]);
+
+        myServer.controller("myServerController1", ["$scope", "$http", "Server", function ($scope, $http, Server) {
+            $scope.testServer = function () {
+                Server.test2(); //调自定义服务里的方法
+                $scope.setCss("background:#ff0"); //调用指令方法
+            }
+        }]);
+
+        myServer.controller("myServerController2", ["$scope", "$http", "Server", function ($scope, $http, Server) {
+            $scope.testServer = function () {
+                Server.test1(); //调自定义服务里的方法
+            }
+        }]);
+
+
+        myServer.controller("myThings", ["$scope", function ($scope) {
+            $scope.things = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1];
+
+
+        }]);
+
+
+    </script>
+</head>
+<body>
+    <div ng-controller="myServerController">
+        <div ng-click="testServer()">myServerController</div>
+        <div server="" style="{{css}}">123123123</div>
+    </div>
+
+    <div ng-controller="myServerController1">
+        <div ng-click="testServer()">myserverController1</div>
+        <div server="" style="{{css}}">123123123</div>
+    </div>
+
+    <div ng-controller="myServerController2">
+        <div ng-click="testServer()">myserverController1</div>
+    </div>
+
+
+    <div ng-controller="myThings">
+        <div ng-repeat="thing in things" ng-bind="thing"></div>
+    </div>
+</body>
+</html>

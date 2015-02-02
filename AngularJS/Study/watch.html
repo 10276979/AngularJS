@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myWatch">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var myWatch = angular.module("myWatch", []);
+        myWatch.controller("myWatchClr", ["$scope", function ($scope) {
+            $scope.itmes = [{
+                title: "Paint pots",
+                quantity: 8,
+                price: 3.95
+
+            }, {
+                title: "Polka dots",
+                quantity: 17,
+                price: 12.95
+
+            }, {
+                title: "Pebbles",
+                quantity: 5,
+                price: 6.95
+            }];
+
+            //检测数组改变
+            //$scope.totalCart = function () {
+            //    var total = 0;
+            //    for (var i = 0; i < $scope.itmes.length; i++) {
+            //        total = total + $scope.itmes[i].quantity * $scope.itmes[i].price;
+            //    }
+            //    return total;
+            //}
+            //function calculateDiscount(newValue, oldValue, scope) {
+            //    console.log(newValue, oldValue, scope.itmes, "fun");
+
+            //    scope.newValue1 = newValue;
+            //    scope.oldValue1 = oldValue;
+            //}
+            //$scope.$watch($scope.totalCart, calculateDiscount);
+
+            //以字符串检测数组
+            function calculateDiscount() {
+                var total = 0;
+                for (var i = 0; i < $scope.itmes.length; i++) {
+                    total = total + $scope.itmes[i].quantity * $scope.itmes[i].price;
+                }
+                console.log(total, "str");
+            }
+            $scope.$watch("itmes", calculateDiscount, true);
+            $scope.itmes.push({ title: "1", quantity: 1, price: 1.5 });
+        }]);
+    </script>
+</head>
+<body>
+    <div ng-controller="myWatchClr">
+        <div ng-repeat="itme in itmes">
+            <span ng-bind="itme.title"></span>
+            <input ng-model="itme.quantity" />
+            <span ng-bind="itme.price | currency"></span>
+            <span ng-bind="itme.price * itme.quantity | currency"></span>
+        </div>
+        <div>
+            <span ng-bind="newValue1 | currency"></span>
+            <span ng-bind="oldValue1 | currency"></span>
+        </div>
+    </div>
+</body>
+</html>

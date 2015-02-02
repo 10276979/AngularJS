@@ -1,0 +1,71 @@
+﻿ <!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myDirective">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script src="../res/framework/angular-sanitize.js"></script>
+    <script type="text/javascript">
+        var myDirective = angular.module("myDirective", ["ngSanitize"]);
+
+        /*
+        1.restrict
+          E： 表示该directive仅能以element方式使用，即：<my-dialog></my-dialog>
+          A： 表示该directive仅能以attribute方式使用，即：<div my-dialog></div>
+          EA: 表示该directive既能以element方式使用，也能以attribute方式使用
+        2.transclude
+          你的directive可能接受页面上的其他html内容时才会用到，建议你先去掉该参数。有些高阶了。
+        3.scope
+          当你写上该属性时，就表示这个directive不会从它的controller里继承$scope对象，而是会重新创建一个。
+        4.templateUrl
+          你的directive里的html内容
+        5.link
+          可以简单理解为，当directive被angular 编译后，执行该方法
+          这里你说的没错，link中的第一个参数scope基本上就是你说的上面写的那个scope。
+
+          element简单说就是$('my-dialog')
+
+          attrs是个map，内容是你这个directive上的所有属性，例如：你在页面上如果这样写了directive:
+
+          <my-dialog type="modal" animation="fade"></my-dialog>
+          那attrs就是：
+          {
+              type: 'modal',
+              animation: 'fade'
+          }
+        */
+        myDirective.directive("holle", function ($document) {
+            return {
+                restrict: "A",
+                template: "<div>123<div ng-transclude></div></div>",
+                replace: true,
+                transclude: true,
+                link: function (scope, element, attrs) {
+                    console.log($document);
+                    console.log(element);
+                    console.log(attrs);
+                    element.bind("mousedown", function () {
+                        console.log(this.innerHTML);
+
+                    });
+                }
+            };
+        });
+        myDirective.controller("DirectiveController", ["$scope", function DirectiveController($scope) {
+            $scope.things = [1, 2, 3, 4, 5, 6];
+            $scope.th = "<div>1234</div>";
+        }]);
+    </script>
+
+</head>
+<body>
+    <div ng-controller="DirectiveController">
+        <div holle>
+            <ul>
+                <li ng-repeat="thing in things" ng-bind="thing"></li>
+            </ul>
+            <div ng-bind-html="th"></div>
+        </div>
+    </div>
+</body>
+</html>

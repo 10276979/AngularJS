@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myHelloWorld">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+
+        //最基础绑定数据，
+        function helloController($scope) {
+            $scope.greeting = {
+                text: "Hello"
+            }
+            $scope.isTure = true;
+
+        }
+
+        //标准写法
+        var myHelloWorld = angular.module("myHelloWorld", []);
+        myHelloWorld.controller("myHelloWorld", ["$scope", function ($scope) {
+            $scope.greeting = {
+                text: "Hello"
+            }
+        }]);
+
+
+    </script>
+
+</head>
+<body>
+
+    <!--最基础HelloWorld-->
+    <div ng-controller="helloController">
+        <input type="text" ng-model="greeting.text" />
+        <div>{{greeting.text}},World</div>
+    </div>
+
+
+    <!--标准写法-->
+    <div ng-controller="myHelloWorld">
+        <input ng-model="greeting.text" />
+        <div><span ng-bind="greeting.text"></span>,World</div>
+    </div>
+
+</body>
+</html>

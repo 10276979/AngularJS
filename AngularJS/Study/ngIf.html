@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("app", []);
+        app.controller("myNgIf", ["$scope", function ($scope) {
+            $scope.num = 4;
+
+
+        }]);
+
+
+    </script>
+</head>
+<body>
+    <div ng-controller="myNgIf">
+        <div ng-if="2+2===num">
+            Won't see this DOM node, not even in the source code
+        </div>
+        <div ng-if="2+2==4">
+            Hi, I do exist
+        </div>
+    </div>
+</body>
+</html>

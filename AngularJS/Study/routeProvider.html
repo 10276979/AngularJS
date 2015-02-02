@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myRoutePro">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script src="../res/framework/angular-route.js"></script>
+    <script type="text/javascript">
+        var myRoutePro = angular.module("myRoutePro", ["ngRoute"]);
+        myRoutePro.config(["$routeProvider", function ($routeProvider) {
+            $routeProvider.when("/test1", {
+                templateUrl: "res/page/test1.html",
+                controller: "test1Clr"
+            }).when("/test2", {
+                templateUrl: "res/page/test2.html",
+                controller: "test2Clr"
+            }).otherwise({
+                redirectTo: "/test1"
+            });
+        }]);
+
+        myRoutePro.factory("test", function () {
+            var testData = [{ "data": "test1" }, { "data": "test2" }];
+            var test = {};
+            test.getTest1 = function () {
+                return testData[0].data;
+            }
+            test.getTest2 = function () {
+                return testData[1].data;
+            }
+            return test;
+        });
+
+        myRoutePro.controller("test1Clr", ["$scope", "test", function ($scope, test) {
+            console.log(test.getTest1());
+
+        }]);
+
+        myRoutePro.controller("test2Clr", ["$scope", "$http", "test", function ($scope, $http, test) {
+
+            $scope.getHttp = function () {
+
+                //方法1
+                $http({ method: 'GET', url: '../res/handler/Handler1.ashx', params: { "name": "z1", "name1": "z2" } }).success(function (data, status, headers, config) {
+                    console.log(data);
+                    // this callback will be called asynchronously
+                    // when the response is available
+                }).error(function (data, status, headers, config) {
+                    console.log(data);
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+
+
+                //方法2
+                //$http.get('../res/handler/Handler1.ashx', { params: { "name": "z1", "name1": "z2" } }).success(function (data, status, headers, config) {
+                //    console.log(data);
+                //    // this callback will be called asynchronously
+                //    // when the response is available
+                //}).error(function (data, status, headers, config) {
+                //    console.log(data);
+                //    // called asynchronously if an error occurs
+                //    // or server returns response with an error status.
+                //});
+            }
+
+            console.log(test.getTest2());
+
+        }]);
+
+    </script>
+</head>
+<body>
+    <div style="width: 100px; height: 100px; background: #ff6a00;">
+        <div ng-view></div>
+    </div>
+    <ul>
+        <li><a href="#/test1">111111</a></li>
+        <li><a href="#/test2">222222</a></li>
+    </ul>
+</body>
+</html>

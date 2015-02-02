@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myTableCss">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <style type="text/css">
+        .selected { background: red; height:50px;}
+    </style>
+    <script type="text/javascript"> 
+        var myTableCss = angular.module("myTableCss", []);
+        myTableCss.controller("myTableCssClr", ["$scope", function ($scope) {
+            $scope.students = [{ "name": "test1", "id": 1 }, { "name": "test2", "id": 2 }, { "name": "test3", "id": 3 }];
+
+            $scope.selectRow = 0;
+            $scope.select = function (index) {
+                $scope.selectRow = index;
+            }
+        }]);
+    </script>
+</head>
+<body>
+    <div ng-controller="myTableCssClr">
+        <table>
+            <tr ng-repeat="student in students" ng-click="select($index)" ng-class="{selected:$index==selectRow}">
+                <td ng-bind="student.name"></td>
+                <td ng-bind="student.id"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="bookStoreApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Angular</title>
+    <script src="res/js/angular.js"></script>
+    <script src="res/js/angular-route.js"></script>
+    <script src="res/js/angular-animate.js"></script>
+    <style type="text/css">
+        body, ul, li, div, p { margin: 0; padding: 0; }
+            ul li { list-style: none; }
+        .nv { height: 120px; }
+            .nv.ng-enter { opacity:0;}
+        .change { width: 100px; height: 30px; background: #808080; color: #ffffff; font-size: 12px; text-align: center; line-height: 30px; }
+    </style>
+    <script type="text/javascript">
+        //run
+        var bookStoreApp = angular.module("bookStoreApp", ["ngRoute", "bookStoreCtrls", "ngAnimate"]);
+        bookStoreApp.config(function ($routeProvider) {
+            $routeProvider.when("/home", {
+                templateUrl: "res/page/home.html",
+                controller: "homeCtrl"
+            }).when("/main", {
+                templateUrl: "res/page/main.html",
+                controller: "mainList"
+            }).otherwise({
+                redirectTo: "/home"
+            });
+        });
+
+        var bookStoreCtrls = angular.module('bookStoreCtrls', []);
+        bookStoreCtrls.controller('homeCtrl', ['$scope', function ($scope) {
+            $scope.data = {
+                text: '测试一下'
+            };
+        }]);
+
+        bookStoreCtrls.controller('mainList', ['$scope', function ($scope) {
+            $scope.datas = [
+                { text: "这是测试1" },
+                { text: "这是测试2" },
+                { text: "这是测试3" }
+            ]
+            $scope.Change = function () {
+                $scope.datas = [
+                    { text: "这是测试1111" },
+                    { text: "这是测试2222" },
+                    { text: "这是测试3333" }
+                ]
+            }
+        }]);
+
+
+        bookStoreApp.controller("click", ["$scope", function ($scope) {
+            $scope.changeUrl = function (url) {
+                window.location.href = url;
+            }
+        }]);
+
+    </script>
+</head>
+<body>
+    <div ng-view class="nv">
+    </div>
+    <div ng-controller="click">
+        <a ng-click="changeUrl('switchPage.html#/home')" href="javascript:void(0)">home</a>
+        <a ng-click="changeUrl('switchPage.html#/main')" href="javascript:void(0)">main</a>
+    </div>
+</body>
+</html>

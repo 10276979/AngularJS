@@ -1,0 +1,33 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example - example-example37</title>
+
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        angular.module('ngAnimate', []).controller('Ctrl', function ($scope) {
+            // 最佳实践，永远使用一个模式
+
+            $scope.templates =
+              [{ name: 'template1.html', url: 'res/page/test1.html' },
+                { name: 'template2.html', url: 'res/page/test2.html' }];
+            $scope.template = $scope.templates[0];
+        })
+
+    </script>
+
+</head>
+<body ng-app="ngAnimate">
+    <div ng-controller="Ctrl">
+        <select ng-model="template" ng-options="t.name for t in templates">
+            <option value="">(blank)</option>
+        </select>
+        url of the template: <tt>{{template}}</tt>
+        <hr />
+        <div class="slide-animate-container">
+            <div class="slide-animate" ng-include="template.url"></div>
+        </div>
+    </div>
+</body>
+</html>

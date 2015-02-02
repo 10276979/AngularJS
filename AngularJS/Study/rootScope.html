@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("app", []);
+        app.run(["$rootScope",function ($rootScope) {
+            $rootScope.name = "name";
+
+        }]);
+         
+        app.controller("rootScopeClr", ["$scope", function ($scope) {
+            $scope.abc = "abc";
+
+
+        }]);
+
+
+    </script>
+
+
+</head>
+<body>
+    <div ng-bind="name"></div>
+    <div ng-controller="rootScopeClr">
+        <div ng-bind="abc"></div>
+        <div ng-bind="name"></div>
+    </div>
+</body>
+</html>

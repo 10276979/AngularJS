@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="dir">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="res/js/angular.js"></script>
+    <script src="res/js/jquery-1.11.1.min.js"></script>
+    <style type="text/css">
+        body, div { margin: 0; padding: 0; }
+    </style>
+    <script type="text/javascript">
+        var dir = angular.module("dir", []);
+        dir.directive("hello", function ($document) {
+            return {
+                restrict: "A",
+                link: function (scope, element, attrs) {
+                    console.log($document);
+
+
+                    var start = { x: 0, y: 0 }, move = { x: 0, y: 0 }, jlMove = { x: 0, y: 0 };
+                    element.bind("mousedown", function (event) {
+                        element.css({
+                            position: "absolute",
+                            background: "red",
+                            color: "#fff"
+                        });
+
+                        start = { x: event.pageX, y: event.pageY };
+                        scope.$apply(function () {
+                            scope.name = "zhangli";
+                        });
+                        $document.bind('mousemove', mousemove);
+                        $document.bind('mouseup', mouseup);
+                    });
+
+                    function mousemove(event) {
+                        move = { x: jlMove.x + event.pageX - start.x, y: jlMove.y + event.pageY - start.y };
+                        element.css({
+                            top: move.y + "px",
+                            left: move.x + "px",
+                        });
+                    }
+
+                    function mouseup() {
+                        $document.unbind('mousemove', mousemove);
+                        $document.unbind('mouseup', mouseup);
+                        scope.$apply(function () {
+                            scope.name = "zhang";
+                        });
+                        element.css({
+                            background: "#ff0",
+                            color: ""
+                        });
+                        jlMove = move;
+                    }
+                }
+            }
+        });
+
+        dir.controller("myDirController", ["$scope", function ($scope) {
+            $scope.name = "zhang";
+
+        }]);
+
+
+    </script>
+</head>
+<body>
+    <div ng-controller="myDirController" >
+        <div hello="" id="abc" style="width: 100px; height: 100px; background: #ff0; font-size: 12px;" ng-bind="name">{{name}}</div>
+    </div>
+</body>
+</html>

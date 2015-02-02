@@ -1,0 +1,1 @@
+﻿<div><div class='title {{red}}' ng-click='toggle()' ng-bind='title' ng-mouseenter='bgMove()' ng-mouseleave='removeBg()'></div><div ng-transclude ng-show='isShow'></div></div>

@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myAddStudent">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var myAddStudent = angular.module("myAddStudent", []);
+        myAddStudent.controller("addStuClr", ["$scope", function ($scope) {
+            $scope.students = [{
+                name: "test1", id: 1
+            }, {
+                name: "test2", id: 2
+            }, {
+                name: "test3", id: 3
+            }];
+
+            $scope.insertTom = function () {
+                $scope.students.splice(2, 0, { name: "addTest", id: 000 });
+            }
+        }]);
+
+
+    </script>
+</head>
+<body>
+    <div ng-controller="addStuClr">
+        <ul>
+            <li ng-repeat="student in students"><span ng-bind="$index"></span><a href="/student/view/{{student.id}}" ng-bind="student.name"></a></li>
+        </ul>
+        <button ng-click="insertTom()">addStudent</button>
+
+    </div>
+</body>
+</html>

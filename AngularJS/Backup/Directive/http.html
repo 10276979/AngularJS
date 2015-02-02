@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="MyHttp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="res/js/angular.js"></script>
+    <script type="text/javascript">
+        var myHttp = angular.module("MyHttp", []);
+
+
+        //如果多个ng-app则需手动启动  不然只会启动第一个ng-app
+        //angular.element(document).ready(function () {
+        //    angular.bootstrap(aap1, "MyHttp");
+        //})
+
+        myHttp.controller("myHttpController", ["$scope", "$http", function ($scope, $http) {
+            $http({
+                method: "GET",
+                url: "res/page/setData.txt"
+            }).success(function (data, status, headers, config) {
+                console.log(data);
+                $scope.arrs = data;
+
+            }).error(function (data, status, headers, config) {
+
+
+            });
+
+
+        }]);
+
+
+
+    </script>
+</head>
+<body>
+    <div ng-controller="myHttpController">
+        <div ng-repeat="arr in arrs" ng-bind="arr"></div>
+
+    </div>
+</body>
+</html>

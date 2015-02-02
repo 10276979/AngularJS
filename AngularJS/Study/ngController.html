@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myApp">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        angular.module('myApp', [])
+.controller('SomeController', function ($scope) {
+    // 最佳实践，永远使用一个模式
+    $scope.someModel = {
+        someValue: 'hello computer'
+    }
+    $scope.someAction = function () {
+        $scope.someModel.someValue = 'hello human, from parent';
+    };
+})
+.controller('ChildController', function ($scope) {
+    $scope.childAction = function () {
+        $scope.someModel.someValue = 'hello human, from child';
+    };
+});
+
+    </script>
+</head>
+<body>
+    <div ng-controller="SomeController">
+        {{ someModel.someValue }}
+ <button ng-click="someAction()">Communicate to child</button>
+        <div ng-controller="ChildController">
+            {{ someModel.someValue }}
+ <button ng-click="childAction()">Communicate to parent</button>
+        </div>
+    </div>
+</body>
+</html>

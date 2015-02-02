@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myHeaderCss">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <style type="text/css">
+        .Error { background: red; opacity: 1; height: 300px; -webkit-transition: all ease-in-out 0.5s; }
+        .Warning { background:yellow; height: 50px; overflow: hidden; -webkit-transition: all ease-in-out 0.5s; }
+    </style>
+
+    <script type="text/javascript">
+        var myHeaderCss = angular.module("myHeaderCss", []);
+        myHeaderCss.controller("myHeaderCssClr", ["$scope", function ($scope) {
+            $scope.messageText = "This is Test Error!";
+            $scope.isError = true;
+            $scope.isWarning = false;
+
+            $scope.showError = function () {
+                $scope.messageText = "This is Test Error!";
+                $scope.isError = true;
+                $scope.isWarning = false;
+            }
+            $scope.showWarning = function () {
+                //$scope.messageText = "This is Test Warning!";
+                $scope.isError = false;
+                $scope.isWarning = true;
+            }
+        }]);
+    </script>
+</head>
+<body>
+    <div ng-controller="myHeaderCssClr">
+        <button ng-click="showError()">Error</button>
+        <button ng-click="showWarning()">Warning</button>
+        <div ng-class="{Error:isError,Warning:isWarning}" ng-bind="messageText"></div>
+
+    </div>
+</body>
+</html>

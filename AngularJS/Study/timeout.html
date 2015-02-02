@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("app", []);
+        app.controller("myTimeoutClr", ["$scope", "$timeout", function ($scope, $timeout) {
+            var updateClock = function () {
+                $scope.clock = new Date;
+                $timeout(function () {
+                    updateClock();
+                }, 1000);
+            }
+
+            updateClock();
+        }]);
+
+    </script>
+</head>
+<body>
+    <div ng-controller="myTimeoutClr">
+        <div ng-bind="clock"></div>
+
+    </div>
+</body>
+</html>

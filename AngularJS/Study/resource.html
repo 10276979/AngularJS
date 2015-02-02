@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script src="../res/framework/angular-route.js"></script>
+    <script src="../res/framework/angular-resource.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('app', ['ngResource', 'ngRoute']);
+
+        // Some APIs expect a PUT request in the format URL/object/ID
+        // Here we are creating an 'update' method
+        app.factory('Notes', ['$resource', function ($resource) {
+
+            return $resource('/user/:userId', { userId: '@id' });
+        }]);
+
+        // In our controller we get the ID from the URL using ngRoute and $routeParams
+        // We pass in $routeParams and our Notes factory along with $scope
+        app.controller('NotesCtrl', ['$scope', '$routeParams', 'Notes', function ($scope, $routeParams, Notes) {
+            $scope.aa = 1;
+
+            var note = Notes.get({ userId: "abc" });
+
+        }]);
+
+    </script>
+
+</head>
+<body>
+    <div ng-controller="NotesCtrl">
+    </div>
+
+</body>
+</html>

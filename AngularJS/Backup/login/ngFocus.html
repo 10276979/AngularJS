@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="NgFocus">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ngFocus</title>
+    <script src="res/js/angular.js"></script>
+    <script type="text/javascript">
+        var ngFocus = angular.module("NgFocus", []);
+        ngFocus.directive("ngfocus", [function () {
+            return {
+                restrict: "A",
+                link: function (scope, element, attrs) {
+                    console.log(scope);
+                    element.bind("click", function () {
+                        scope.test1 = 2222;
+                        
+
+                    })
+
+                }
+
+            }
+        }]);
+
+        ngFocus.controller("ngFocusController", ["$scope", function ($scope) {
+            $scope.test1 = 123;
+
+        }]);
+
+    </script>
+</head>
+<body ng-controller="ngFocusController">
+    <input ngfocus="" value="123" />
+
+    <span class="{{test1}}">请输入内容</span>
+    </input>
+</body>
+</html>
