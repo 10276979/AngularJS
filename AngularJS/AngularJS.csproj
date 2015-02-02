@@ -4135,7 +4135,6 @@
     <Content Include="Study\for.html" />
     <Content Include="Study\headerCss.html" />
     <Content Include="Study\HelloWorld.html" />
-    <Content Include="Study\HtmlPage1.html" />
     <Content Include="Study\ngController.html" />
     <Content Include="Study\ngIf.html" />
     <Content Include="Study\ngInclude.html" />
