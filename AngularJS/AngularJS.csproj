@@ -4140,6 +4140,7 @@
     <Content Include="Study\ngInclude.html" />
     <Content Include="Study\ngShow.html" />
     <Content Include="Study\ngSwitch.html" />
+    <Content Include="Study\Plug_Test.html" />
     <Content Include="Study\resource.html" />
     <Content Include="Study\rootScope.html" />
     <Content Include="Study\routeProvider.html" />

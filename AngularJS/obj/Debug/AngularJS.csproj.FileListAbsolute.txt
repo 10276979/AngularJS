@@ -3,3 +3,4 @@ D:\MyProjects\AngularJS\AngularJS\bin\AngularJS.pdb
 D:\MyProjects\AngularJS\AngularJS\obj\Debug\AngularJS.dll
 D:\MyProjects\AngularJS\AngularJS\obj\Debug\AngularJS.pdb
 D:\MyProjects\AngularJS\AngularJS\obj\Debug\AngularJS.csprojResolveAssemblyReference.cache
+D:\MyProjects\AngularJS\AngularJS\bin\AngularJS.dll.config

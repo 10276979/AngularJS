@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="plug_Test">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var plug = angular.module("plug_Test", []);
+        plug.run(function ($rootScope) {
+            $rootScope.publicVar = "这是一个全局变量";
+
+        });
+
+        plug.controller("privateVarCrl", ["$scope", function ($scope) {
+            $scope.privateVar = "这是一个私有变量";
+
+        }]);
+
+    </script>
+</head>
+<body>
+    <div>
+        <div>{{publicVar}}</div>
+        <div ng-controller="privateVarCrl">{{privateVar}}</div>
+
+    </div>
+</body>
+</html>
