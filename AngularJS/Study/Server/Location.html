@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="location">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="http://www.ngnice.com/angular.min.js"></script>
+    <style type="text/css">
+        div, span { margin: 0; padding: 0; }
+    </style>
+    <script type="text/javascript">
+        var plug = angular.module("location", []);
+        plug.run(function ($rootScope) {
+            $rootScope.publicVar = "这是一个全局变量";
+
+        });
+
+        plug.controller("locationClr", ["$scope", "$location", "$window", "$anchorScroll", "$animate", "$cacheFactory", "$compile", "$controller", "$document", "$exceptionHandler", "$filter", "$http", "$httpBackend", "$interpolate", "$interval", "$locale", "$log", "$parse", "$q", "$rootElement", "$rootScope", "$sce", "$sceDelegate", "$templateCache", "$timeout", "$timeout", function ($scope, $location, $window, $anchorScroll, $animate, $cacheFactory, $compile, $controller, $document, $exceptionHandler, $filter, $http, $httpBackend, $interpolate, $interval, $locale, $log, $parse, $q, $rootElement, $rootScope, $sce, $sceDelegate, $templateCache, $timeout, $timeout) {
+            $scope.keys = [];
+            $scope.cache = $cacheFactory('cacheId');
+            $scope.put = function (key, value) {
+                $scope.cache.put(key, value);
+                $scope.keys.push(key);
+                console.log($scope.cache.info());
+            };
+
+        }]);
+
+    </script>
+</head>
+<body>
+    <div ng-controller="locationClr">
+        <input ng-model="newCacheKey" placeholder="Key">
+        <input ng-model="newCacheValue" placeholder="Value">
+        <button ng-click="put(newCacheKey, newCacheValue)">Cache</button>
+
+        <p ng-if="keys.length">Cached Values</p>
+        <div ng-repeat="key in keys">
+            <span ng-bind="key"></span>
+            <span>: </span>
+            <b ng-bind="cache.get(key)"></b>
+        </div>
+
+        <p>Cache Info</p>
+        <div ng-repeat="(key, value) in cache.info()">
+            <span ng-bind="key"></span>
+            <span>: </span>
+            <b ng-bind="value"></b>
+        </div>
+
+    </div>
+</body>
+</html>
