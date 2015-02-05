@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="server">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../res/framework/angular.js"></script>
+    <script type="text/javascript">
+
+        var plug = angular.module("server", []);
+        plug.controller("logClr", ["$scope", "$log", function ($scope, $log) {
+            $log.log($log);
+            $log.info($log);
+            $log.warn($log);
+            $log.error($log);
+            $log.debug($log);
+            $log.log("");
+
+            console.log(console);
+            console.info(console);
+            console.warn(console);
+            console.error(console);
+            console.debug(console);
+
+        }]);
+
+    </script>
+</head>
+<body>
+    <div ng-controller="logClr">
+
+    </div>
+</body>
+</html>

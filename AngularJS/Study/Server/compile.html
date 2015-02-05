@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="server">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../res/framework/angular.js"></script>
+    <style type="text/css">
+        div, span { margin: 0; padding: 0; }
+    </style>
+    <script type="text/javascript">
+        var plug = angular.module("server", []);
+        plug.run(function ($rootScope) {
+            $rootScope.publicVar = "这是一个全局变量";
+
+        });
+
+        plug.controller("compileClr", ["$scope", "$compile", function ($scope, $compile) {
+            console.log($compile);
+
+        }]);
+
+    </script>
+</head>
+<body>
+    <div ng-controller="compileClr">
+
+    </div>
+
+</body>
+</html>

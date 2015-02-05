@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="server">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../res/framework/angular.js"></script>
+    <script type="text/javascript">
+
+        var plug = angular.module("server", []);
+        plug.controller("httpClr", ["$scope", "$http", function ($scope, $http) {
+            $scope.getHttp = function () {
+
+                //方法1
+                $http({ method: 'GET', url: '../../res/handler/Handler1.ashx', params: { "name": "z1", "name1": "z2" } }).success(function (data, status, headers, config) {
+                    console.log(data);
+                    // this callback will be called asynchronously
+                    // when the response is available
+                }).error(function (data, status, headers, config) {
+                    console.log(data);
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+
+
+                //方法2
+                //$http.get('../../res/handler/Handler1.ashx', { params: { "name": "z1", "name1": "z2" } }).success(function (data, status, headers, config) {
+                //    console.log(data);
+                //    // this callback will be called asynchronously
+                //    // when the response is available
+                //}).error(function (data, status, headers, config) {
+                //    console.log(data);
+                //    // called asynchronously if an error occurs
+                //    // or server returns response with an error status.
+                //});
+            }
+        }]);
+
+    </script>
+</head>
+<body>
+    <div ng-controller="httpClr">
+        <button ng-click="getHttp()">http</button>
+
+    </div>
+</body>
+</html>

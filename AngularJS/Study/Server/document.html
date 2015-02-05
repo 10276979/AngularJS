@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="server">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>123</title>
+    <script src="../../res/framework/angular.js"></script>
+    <style type="text/css">
+        div, span { margin: 0; padding: 0; }
+    </style>
+    <script type="text/javascript">
+        var plug = angular.module("server", []);
+        plug.run(function ($rootScope) {
+            $rootScope.publicVar = "这是一个全局变量";
+
+        });
+
+        plug.controller("documentClr", ["$scope", "$document", function ($scope, $document) {
+            console.log($document);
+            console.log($document[0].title);
+            console.log(angular.element(abc)[0].innerHTML);
+            console.log(angular.element(window.document)[0].title);
+
+        }]);
+
+    </script>
+</head>
+<body>
+    <div ng-controller="documentClr">
+        <div id="abc">11232321</div>
+
+    </div>
+</body>
+</html>
