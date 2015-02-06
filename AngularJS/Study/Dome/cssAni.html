@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="dome">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../res/framework/angular.js"></script>
+    <script src="../../res/framework/angular-animate.js"></script>
+    <style type="text/css">
+        body, div, ul, li { margin: 0; padding: 0; }
+            ul li { list-style: none; }
+        #cssAni { width: 300px; margin: 0 auto; }
+        .list { background: #ff6a00; border: 1px solid black; -webkit-transition: all ease-in-out 0.5s; overflow: hidden; }
+
+            .list.ng-enter,
+            .list.ng-leave.ng-leave-active { height: 0px; }
+
+                .list.ng-leave,
+                .list.ng-enter.ng-enter-active { height: 30px; }
+    </style>
+    <script type="text/javascript">
+        var dome = angular.module("dome", ["ngAnimate"]);
+        dome.controller("cssAniClr", ["$scope", function ($scope) {
+            $scope.checkboxSelect = false;
+            $scope.objects = [
+                { "name": "zhangsan", "age": 20 },
+                { "name": "lisi", "age": 25 },
+            ];
+
+        }]);
+
+
+
+    </script>
+
+</head>
+<body>
+    <div id="cssAni" ng-controller="cssAniClr">
+        <input type="checkbox" id="a1" ng-model="checkboxSelect" />
+        <label ng-bind="checkboxSelect" for="a1"></label>
+
+        <div class="list" ng-if="checkboxSelect">
+            <ul>
+                <li ng-repeat="obj in objects"><span ng-bind="obj.name"></span>:<span ng-bind="obj.age"></span></li>
+            </ul>
+        </div>
+
+
+    </div>
+
+</body>
+</html>

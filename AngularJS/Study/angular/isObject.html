@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="ang">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../res/framework/angular.js"></script>
+    <script type="text/javascript">
+        var ang = angular.module("ang", []);
+        ang.controller("isObjectClr", ["$scope", function ($scope) {
+            $scope.datas = [
+                { name: "zhangsan", age: 25 },
+                { name: "lisi", age: 22 }
+            ];
+            $scope.name = "zhangsan";
+            $scope.getName = function () {
+                return $scope.data[0].name;
+            }
+            console.log(angular.isFunction($scope.getName));
+
+
+        }]);
+
+
+    </script>
+</head>
+<body>
+    <div ng-controller="isObjectClr">
+        <ul>
+            <li ng-repeat="data in datas" ng-bind="data.name"></li>
+
+        </ul>
+
+    </div>
+
+</body>
+</html>

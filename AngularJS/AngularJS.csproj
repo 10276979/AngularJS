@@ -4127,10 +4127,12 @@
     <Content Include="res\framework\angular.js" />
     <Content Include="res\page\test1.html" />
     <Content Include="res\page\test2.html" />
+    <Content Include="Study\angular\isObject.html" />
     <Content Include="Study\Basics\addStudent.html" />
     <Content Include="Study\Basics\checked.html" />
     <Content Include="Study\Basics\Directive.html" />
     <Content Include="Study\Basics\factory.html" />
+    <Content Include="Study\Dome\cssAni.html" />
     <Content Include="Study\Server\filter.html" />
     <Content Include="Study\Basics\for.html" />
     <Content Include="Study\Basics\headerCss.html" />
