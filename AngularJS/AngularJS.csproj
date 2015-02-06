@@ -4133,6 +4133,10 @@
     <Content Include="Study\Basics\Directive.html" />
     <Content Include="Study\Basics\factory.html" />
     <Content Include="Study\Dome\cssAni.html" />
+    <Content Include="Study\route\ngRoute.html" />
+    <Content Include="Study\route\page\home.html" />
+    <Content Include="Study\route\page\list.html" />
+    <Content Include="Study\route\page\login.html" />
     <Content Include="Study\Server\filter.html" />
     <Content Include="Study\Basics\for.html" />
     <Content Include="Study\Basics\headerCss.html" />

@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myNgRoute">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../res/framework/angular.js"></script>
+    <script src="../../res/framework/angular-route.js"></script>
+    <style type="text/css">
+        body, div, ul, li { margin: 0; padding: 0; }
+        .view { height: 300px; background: rgba(0,0,0,0.1); }
+        .menu a { width: 80px; height: 50px; line-height: 50px; background: rgba(0,0,0,0.5); display: inline-block; border-right: 1px solid #fff; text-align: center; text-decoration: none; }
+        .menu .sel { background: #ff6a00; }
+    </style>
+    <script type="text/javascript">
+        var myNgRoute = angular.module("myNgRoute", ["ngRoute"]);
+        myNgRoute.config(["$routeProvider", function ($routeProvide) {
+            $routeProvide.when("/", {
+                templateUrl: "page/home.html",
+                controller: "homeController"
+            }).when("/login", {
+                templateUrl: "page/login.html",
+                controller: "loginController"
+            }).when("/list", {
+                templateUrl: "page/list.html",
+                controller: "listController"
+            }).otherwise({
+                redirectTo: "/"
+            });
+        }]);
+
+        myNgRoute.controller("menuController", ["$scope", function ($scope) {
+            $scope.menus = [
+                { "title": "Home", "url": "#/", "sel": true },
+                { "title": "Login", "url": "#/login", "sel": false },
+                { "title": "List", "url": "#/list", "sel": false }
+            ];
+
+            var rIndex = 0;
+            $scope.setClass = function (index) {
+                $scope.menus[rIndex].sel = false;
+                $scope.menus[index].sel = true;
+                rIndex = index;
+            }
+
+        }]);
+
+        myNgRoute.controller("homeController", ["$scope", function ($scope) {
+
+
+        }]);
+
+        myNgRoute.controller("loginController", ["$scope", function ($scope) {
+
+
+        }]);
+
+        myNgRoute.controller("listController", ["$scope", function ($scope) {
+            $scope.datas = [
+                { name: "zhangsan", age: 22, add: "苏州市" },
+                { name: "lisi", age: 20, add: "上海市" },
+                { name: "wangwu", age: 26, add: "北京市" },
+            ];
+
+
+        }]);
+
+    </script>
+</head>
+<body>
+    <div class="view">
+        <div ng-view>
+        </div>
+    </div>
+    <div class="menu" ng-controller="menuController">
+        <a ng-repeat="menu in menus" ng-class="{sel:menu.sel}" ng-click="setClass($index)" ng-href="{{menu.url}}" ng-bind="menu.title"></a>
+        <span ng-repeat="menu in menus" ng-bind="menu.sel"></span>
+    </div>
+
+</body>
+</html>
