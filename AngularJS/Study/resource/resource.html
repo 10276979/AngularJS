@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myResource">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script src="../../res/framework/angular.js"></script>
+    <script src="../../res/framework/angular-resource.js"></script>
+    <script type="text/javascript">
+        var myResource = angular.module("myResource", ["ngResource"]);
+
+        myResource.run(["$rootScope","$window",function ($rootScope,$window) {
+
+
+        }]);
+
+        myResource.controller("myResourceClr", ["$scope", "$resource", function ($scope, $resource) {
+            var User = $resource("/api/users/:userID/", { userID: "@id" });
+
+            //var u = User.get({ userID: "123" }, function (res) {
+            //    console.log(res);
+            //});
+
+            User.save({ userID: "abc" }, { name: "Ari" }, function (res) {
+                console.log(res);
+
+            }, function (res) {
+                console.log(res);
+            });
+
+        }]);
+
+
+
+
+    </script>
+</head>
+<body>
+    <div ng-controller="myResourceClr">
+    </div>
+</body>
+</html>

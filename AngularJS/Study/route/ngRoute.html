@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myNgRoute">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="myNgRoute ">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
@@ -13,13 +13,23 @@
     </style>
     <script type="text/javascript">
         var myNgRoute = angular.module("myNgRoute", ["ngRoute"]);
+        myNgRoute.run(["$rootScope", "$location", function ($rootScope, $location) {
+            $rootScope.$on("$routeChangeStart", function (evt, next, curren) {
+
+            });
+
+        }]);
+
         myNgRoute.config(["$routeProvider", function ($routeProvide) {
             $routeProvide.when("/", {
                 templateUrl: "page/home.html",
                 controller: "homeController"
             }).when("/login", {
                 templateUrl: "page/login.html",
-                controller: "loginController"
+                controller: function ($scope) {
+                    $scope.username = "username1";
+                    $scope.password = "password1";
+                }
             }).when("/list", {
                 templateUrl: "page/list.html",
                 controller: "listController"
@@ -51,7 +61,7 @@
 
         myNgRoute.controller("loginController", ["$scope", function ($scope) {
 
-             
+
         }]);
 
         myNgRoute.controller("listController", ["$scope", function ($scope) {
